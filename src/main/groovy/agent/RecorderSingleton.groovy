@@ -20,9 +20,10 @@ public enum RecorderSingleton {
 	@Requires({ ident != null &&  probesRemaining.containsKey(ident.className) })
 	@Synchronized
 	public void record(BasicBlockIdent ident) {
-		probesRemaining[ident.className].remove(ident);
-
-		listeners.each { it.probeEvent(ident) }
+		// Nessisary because we can't redefine things with active stack frames
+		// http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/Instrumentation.html#redefineClasses%28java.lang.instrument.ClassDefinition...%29
+		if( probesRemaining[ident.className].remove(ident))
+			listeners.each { it.probeEvent(ident) }
 	}
 
 	@Requires( { idents != null })

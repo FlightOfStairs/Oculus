@@ -9,8 +9,8 @@ public class Agent implements ClassFileTransformer {
 	
 	public final TransformManager transformManager;
 
-	private Agent(final List<String> targetList) {
-		this.transformManager = new TransformManager(targetList)
+	private Agent(Instrumentation instrumentation, final List<String> targetList) {
+		this.transformManager = new TransformManager(instrumentation, targetList)
 	}
 	
 
@@ -20,7 +20,7 @@ public class Agent implements ClassFileTransformer {
 	}
 
 	public static void premain(final String options, final Instrumentation inst) {
-		inst.addTransformer(new Agent(["agenttest/"]));
+		inst.addTransformer(new Agent( inst,["agenttest/"]), true);
 		
 		LoggerFactory.getLogger(Agent.class).debug("Occulus agent started.");
 	}

@@ -13,12 +13,12 @@ import org.apache.bcel.generic.Type
 import org.apache.bcel.Constants
 import org.apache.bcel.generic.PUSH
 
-public class Instrumentation {
+public class Instrumenter {
 
 	public final String className;
 	private final byte[] bytes;
 
-	public Instrumentation(String className, byte[] bytes) {
+	public Instrumenter(String className, byte[] bytes) {
 		this.className = className;
 		this.bytes = bytes;
 	}
