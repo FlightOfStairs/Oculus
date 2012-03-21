@@ -23,7 +23,7 @@ class TransformManager {
 
 		addShutdownHook {
 
-			(new File("occulus.txt")).withWriter { writer ->
+			(new File("oculus.txt")).withWriter { writer ->
 				classesSeen.each { className ->
 					RecorderSingleton.INSTANCE.basicBlocksRemaining(className).each {
 						writer.write(it.toString() + "\n");
