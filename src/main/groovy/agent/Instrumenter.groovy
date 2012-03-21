@@ -12,6 +12,7 @@ import org.apache.bcel.generic.InstructionFactory
 import org.apache.bcel.generic.Type
 import org.apache.bcel.Constants
 import org.apache.bcel.generic.PUSH
+import org.apache.bcel.generic.InstructionHandle
 
 public class Instrumenter {
 
@@ -54,7 +55,8 @@ public class Instrumenter {
 			}
 			
 			handleInserts.each { handle, code ->
-				methodGen.getInstructionList().insert(handle, code)
+				def newhandle = methodGen.getInstructionList().insert(handle, code)
+				methodGen.getInstructionList().redirectBranches(handle, newhandle)
 			}
 
 			classGen.removeMethod(method);

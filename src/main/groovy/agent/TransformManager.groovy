@@ -20,10 +20,21 @@ class TransformManager {
 
 			instrumentation.retransformClasses(Class.forName(it.className.replaceAll("/", ".")));
 		} as RecorderListener)
+
+		addShutdownHook {
+
+			(new File("occulus.txt")).withWriter { writer ->
+				classesSeen.each { className ->
+					RecorderSingleton.INSTANCE.basicBlocksRemaining(className).each {
+						writer.write(it.toString() + "\n");
+					}
+				}
+			}
+		}
 	}
 
 	public byte[] transform(final String className, final byte[] bytes) {
-		if(! targets.any { className.startsWith(it) }) return bytes;
+		if(! targets.any { className.startsWith(it) }) return null;
 
 		def instrumentater = new Instrumenter(className, bytes);
 
