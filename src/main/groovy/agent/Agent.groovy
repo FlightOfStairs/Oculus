@@ -7,20 +7,14 @@ import org.slf4j.LoggerFactory;
 
 public class Agent implements ClassFileTransformer {
 	
-	public final List<String> targetList;
-	
-	public final TransformManager transformManager = new TransformManager();
+	public final TransformManager transformManager;
 
 	private Agent(final List<String> targetList) {
-		this.targetList = targetList;
-		
-		
+		this.transformManager = new TransformManager(targetList)
 	}
 	
 
 	public final byte[] transform(final ClassLoader ldr, final String className, final Class clazz, final ProtectionDomain domain, final byte[] bytes) {
-		if(! targetList.any { className.startsWith(it) }) return bytes;
-
 		try { return transformManager.transform(className, bytes); }
 		catch(all) { all.printStackTrace() }
 	}
