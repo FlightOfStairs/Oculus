@@ -36,13 +36,13 @@ class TransformManager {
 	public byte[] transform(final String className, final byte[] bytes) {
 		if(! targets.any { className.startsWith(it) }) return null;
 
-		def instrumentater = new Instrumenter(className, bytes);
+		def instrumenter = new Instrumenter(className, bytes);
 
 		if(!classesSeen.contains(className)) {
-			RecorderSingleton.INSTANCE.addBlocks(instrumentater.getBasicBlocks());
+			RecorderSingleton.INSTANCE.addBlocks(instrumenter.getBasicBlocks());
 			classesSeen << className
 		}
 
-		return instrumentater.instrument(RecorderSingleton.INSTANCE.basicBlocksRemaining(className));
+		return instrumenter.instrument(RecorderSingleton.INSTANCE.basicBlocksRemaining(className));
 	}
 }
