@@ -55,6 +55,7 @@ public class Instrumenter {
 			}
 			
 			handleInserts.each { handle, code ->
+				if(handle == null || code == null) return;
 				def newhandle = methodGen.getInstructionList().insert(handle, code)
 				methodGen.getInstructionList().redirectBranches(handle, newhandle)
 			}
@@ -99,7 +100,7 @@ public class Instrumenter {
 				InstructionContext current = contexts.remove(0);
 
 				if(predecessorMap[current].size() >= 2) {
-					basicBlocks << block
+					if(! block.isEmpty()) basicBlocks << block
 					block = []
 				}
 
@@ -109,7 +110,7 @@ public class Instrumenter {
 						current.successors.size() != 1 ||
 						current.successors[0].instruction.position != contexts[0].instruction.position) {
 
-					basicBlocks << block
+					if(! block.isEmpty()) basicBlocks << block
 					block = []
 				}
 			}
