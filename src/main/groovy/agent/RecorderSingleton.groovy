@@ -20,9 +20,9 @@ public enum RecorderSingleton {
 	@Requires({ ident != null &&  probesRemaining.containsKey(ident.className) })
 	@Synchronized
 	public void record(BasicBlockIdent ident) {
-		probesRemaining[ident.className].remove(ident);
 
-		listeners.each { it.probeEvent(ident) }
+		if( probesRemaining[ident.className].remove(ident))
+			listeners.each { it.probeEvent(ident) }
 	}
 
 	@Requires( { idents != null })
