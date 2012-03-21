@@ -1,0 +1,65 @@
+Compiled from "HelloWorld.java"
+public class agenttest.HelloWorld {
+public agenttest.HelloWorld();
+Code:
+: aload_0       
+: invokespecial #8                  // Method java/lang/Object."<init>":()V
+: return        
+
+public void count();
+Code:
+: iconst_0      
+: istore_1      
+: goto          40
+: getstatic     #15                 // Field java/lang/System.out:Ljava/io/PrintStream;
+: new           #21                 // class java/lang/StringBuilder
+: dup           
+: aload_0       
+: invokevirtual #23                 // Method hello:()Ljava/lang/String;
+: invokestatic  #27                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+: invokespecial #33                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+: ldc           #36                 // String  
+: invokevirtual #38                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+: iload_1       
+: invokevirtual #42                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+: invokevirtual #45                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+: invokevirtual #48                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+: iinc          1, 1
+: iload_1       
+: iconst_5      
+: if_icmplt     5
+: iconst_0      
+: istore_1      
+: goto          85
+: getstatic     #15                 // Field java/lang/System.out:Ljava/io/PrintStream;
+: new           #21                 // class java/lang/StringBuilder
+: dup           
+: iload_1       
+: invokestatic  #53                 // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+: invokespecial #33                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+: ldc           #36                 // String  
+: invokevirtual #38                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+: aload_0       
+: invokevirtual #23                 // Method hello:()Ljava/lang/String;
+: invokevirtual #38                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+: invokevirtual #45                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+: invokevirtual #48                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+: iinc          1, 1
+: iload_1       
+: iconst_5      
+: if_icmplt     50
+: return        
+
+public java.lang.String hello();
+Code:
+: ldc           #58                 // String Hello
+: areturn       
+
+public static void main(java.lang.String[]);
+Code:
+: new           #1                  // class agenttest/HelloWorld
+: dup           
+: invokespecial #62                 // Method "<init>":()V
+: invokevirtual #63                 // Method count:()V
+: return        
+}

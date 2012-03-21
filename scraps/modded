@@ -1,0 +1,85 @@
+Compiled from "HelloWorld.java"
+public class agenttest.HelloWorld {
+public agenttest.HelloWorld();
+Code:
+: ldc           #70                 // String agenttest/HelloWorld <init> ()V 0 3
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: aload_0       
+: invokespecial #8                  // Method java/lang/Object."<init>":()V
+: return        
+
+public void count();
+Code:
+: ldc           #77                 // String agenttest/HelloWorld count ()V 0 3
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: iconst_0      
+: istore_1      
+: goto          50
+: ldc           #79                 // String agenttest/HelloWorld count ()V 5 14
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: getstatic     #15                 // Field java/lang/System.out:Ljava/io/PrintStream;
+: new           #21                 // class java/lang/StringBuilder
+: dup           
+: aload_0       
+: invokevirtual #23                 // Method hello:()Ljava/lang/String;
+: invokestatic  #27                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+: invokespecial #33                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+: ldc           #36                 // String  
+: invokevirtual #38                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+: iload_1       
+: invokevirtual #42                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+: invokevirtual #45                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+: invokevirtual #48                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+: iinc          1, 1
+: ldc           #81                 // String agenttest/HelloWorld count ()V 40 3
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: iload_1       
+: iconst_5      
+: if_icmplt     10
+: ldc           #83                 // String agenttest/HelloWorld count ()V 45 3
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: iconst_0      
+: istore_1      
+: goto          110
+: ldc           #85                 // String agenttest/HelloWorld count ()V 50 14
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: getstatic     #15                 // Field java/lang/System.out:Ljava/io/PrintStream;
+: new           #21                 // class java/lang/StringBuilder
+: dup           
+: iload_1       
+: invokestatic  #53                 // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+: invokespecial #33                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+: ldc           #36                 // String  
+: invokevirtual #38                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+: aload_0       
+: invokevirtual #23                 // Method hello:()Ljava/lang/String;
+: invokevirtual #38                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+: invokevirtual #45                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+: invokevirtual #48                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+: iinc          1, 1
+: ldc           #87                 // String agenttest/HelloWorld count ()V 85 3
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: iload_1       
+: iconst_5      
+: if_icmplt     70
+: ldc           #89                 // String agenttest/HelloWorld count ()V 90 1
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: return        
+
+public java.lang.String hello();
+Code:
+: ldc           #91                 // String agenttest/HelloWorld hello ()Ljava/lang/String; 0 2
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: ldc           #58                 // String Hello
+: areturn       
+
+public static void main(java.lang.String[]);
+Code:
+: ldc           #93                 // String agenttest/HelloWorld main ([Ljava/lang/String;)V 0 5
+: invokestatic  #75                 // Method agent/RecorderSingleton.record:(Ljava/lang/String;)V
+: new           #1                  // class agenttest/HelloWorld
+: dup           
+: invokespecial #62                 // Method "<init>":()V
+: invokevirtual #63                 // Method count:()V
+: return        
+}

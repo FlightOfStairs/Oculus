@@ -64,8 +64,6 @@ public class Instrumenter {
 			classGen.addMethod(methodGen.getMethod());
 		}
 
-		classGen.getJavaClass().dump("HelloWorld.class");
-		
 		return classGen.getJavaClass().getBytes()
 	}
 
