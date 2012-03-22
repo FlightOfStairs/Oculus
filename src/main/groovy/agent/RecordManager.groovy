@@ -29,7 +29,8 @@ class RecordManager {
 
 			(new File("oculus.txt")).withWriter { writer ->
 				classes.values().each { classRecord ->
-					writer.write(classRecord.toString() + "\n");
+					if(classRecord.remainingBlocks().size() != 0)
+						writer.write(classRecord.toString() + "\n");
 				}
 			}
 		}
