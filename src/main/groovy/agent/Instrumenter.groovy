@@ -53,16 +53,22 @@ public class Instrumenter {
 
 				handleInserts[handle] = instructionList
 			}
-			
+
+			InstructionList iList = methodGen.getInstructionList()
+
 			handleInserts.each { handle, code ->
 				if(handle == null || code == null) return;
-				def newhandle = methodGen.getInstructionList().insert(handle, code)
-				methodGen.getInstructionList().redirectBranches(handle, newhandle)
+				def newhandle = iList.insert(handle, code)
+				iList.redirectBranches(handle, newhandle)
 			}
 
-			classGen.removeMethod(method);
+			methodGen.setInstructionList(iList);
+
+			methodGen.getInstructionList().setPositions();
 			methodGen.setMaxStack();
-			classGen.addMethod(methodGen.getMethod());
+			methodGen.setMaxLocals();
+			
+			methodGen.
 		}
 
 		return classGen.getJavaClass().getBytes()

@@ -75,9 +75,6 @@
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 					<archive>
-						<manifest>
-							<mainClass>agenttest.HelloWorld</mainClass>
-						</manifest>
 						<manifestEntries>
 							<Premain-Class>agent.Agent</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
