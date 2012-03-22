@@ -35,6 +35,6 @@ public class ClassRecord {
 
 		def partUsed = used.intersect(unused)
 
-		return "$className\t${unused.sort()}\t${partUsed.sort()}"
+		return "${className.replaceAll("/", ".")}\t${unused.sort()}\t${partUsed.sort()}"
 	}
 }
