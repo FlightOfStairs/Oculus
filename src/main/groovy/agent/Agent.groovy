@@ -7,13 +7,13 @@ import org.slf4j.LoggerFactory;
 
 public class Agent implements ClassFileTransformer {
 	
-	public final TransformManager transformManager;
+	public final RecordManager transformManager;
 
 	private Agent(Instrumentation instrumentation, final List<String> targetList) {
 		
 		println targetList
 		
-		this.transformManager = new TransformManager(instrumentation, targetList)
+		this.transformManager = new RecordManager(instrumentation, targetList)
 	}
 	
 

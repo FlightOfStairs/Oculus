@@ -8,8 +8,10 @@ final class BasicBlockIdent {
 	String methodName;
 	String methodSig;
 	int position;
-	int size;
+
+	int sourceStart;
+	int sourceEnd;
 
 	@Override
-	public String toString() { return className + " " + methodName + " " + methodSig + " " + position + " " + size }
+	public String toString() { return className + " " + methodName + " " + methodSig + " " + position + " " + sourceStart + " " + sourceEnd }
 }

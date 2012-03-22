@@ -13,6 +13,7 @@ import org.apache.bcel.generic.Type
 import org.apache.bcel.Constants
 import org.apache.bcel.generic.PUSH
 import org.apache.bcel.generic.InstructionHandle
+import org.apache.bcel.classfile.LineNumberTable
 
 public class Instrumenter {
 
@@ -25,7 +26,7 @@ public class Instrumenter {
 	}
 
 	@Ensures({ result != null })
-	public byte[] instrument(List<BasicBlockIdent> basicBlocks) {
+	public byte[] instrument(Set<BasicBlockIdent> basicBlocks) {
 		ClassGen classGen = classGen();
 
 
@@ -39,7 +40,6 @@ public class Instrumenter {
 			if(methodBlocks.isEmpty()) continue
 
 			MethodGen methodGen = new MethodGen(method, className, classGen.getConstantPool())
-
 
 			methodBlocks.each { block ->
 			
@@ -77,8 +77,16 @@ public class Instrumenter {
 		for(def method : classGen.getMethods()) {
 
 			MethodGen methodGen = new MethodGen(method, className, classGen.getConstantPool())
+			
+			LineNumberTable lineTable = methodGen.getLineNumberTable(methodGen.getConstantPool());
 
-			def cfg = new ControlFlowGraph(methodGen)
+			def cfg
+
+			try {
+				cfg = new ControlFlowGraph(methodGen)
+			} catch (NullPointerException) {
+				return [];
+			}
 
 			def predecessorMap = [:]
 
@@ -115,10 +123,20 @@ public class Instrumenter {
 				}
 			}
 
-			bbIdents.addAll(basicBlocks.collect { new BasicBlockIdent(className, method.getName(), method.getSignature(), it.first().position, it.size()) })
+			bbIdents.addAll(basicBlocks.collect {
+				def sourceLines = it.collect({ instructionHandle -> lineTable.getSourceLine(instructionHandle.position) }) as Set
+				
+				def sourceStart = sourceLines.min()
+				def sourceEnd = sourceLines.max()
+				
+				assert sourceLines.size() == sourceEnd - sourceStart + 1
+
+				new BasicBlockIdent(className, method.getName(), method.getSignature(),
+						it.first().position as int, sourceStart, sourceEnd)
+			})
 		}
-		
-		return bbIdents
+
+		return bbIdents.findAll { it.sourceStart != -1 && it.sourceEnd != -1 }
 	}
 
 	private ClassGen classGen() {

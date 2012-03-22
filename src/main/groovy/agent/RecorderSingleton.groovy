@@ -10,38 +10,20 @@ public enum RecorderSingleton {
 
 	public static void record(String s) {
 		def parts = s.split(" ")
-		INSTANCE.record(new BasicBlockIdent(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]), Integer.parseInt(parts[4])));
+		INSTANCE.record(new BasicBlockIdent(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]),Integer.parseInt(parts[4]), Integer.parseInt(parts[5])));
 	}
-
-	private final Map<String, List<BasicBlockIdent>> probesRemaining = [:];
 
 	private final List<RecorderListener> listeners = [];
 
-	@Requires({ ident != null &&  probesRemaining.containsKey(ident.className) })
+	@Requires({ ident != null })
 	@Synchronized
 	public void record(BasicBlockIdent ident) {
-		// Necessary because we can't redefine things with active stack frames
+		// May occur several times for each bb...
 		// http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/Instrumentation.html#redefineClasses%28java.lang.instrument.ClassDefinition...%29
-		if( probesRemaining[ident.className].remove(ident))
-			listeners.each { it.probeEvent(ident) }
-	}
 
-	@Requires( { idents != null })
-	@Ensures({ idents.collect({ it.className }).every { probesRemaining.containsKey(it) } })
-	public void addBlocks(Collection<BasicBlockIdent> idents) {
-		idents.each { 
-			if(! probesRemaining.containsKey(it.className))
-				probesRemaining[it.className] = []
-			probesRemaining[it.className] << it
-		}
+		listeners.each { it.probeEvent(ident) }
 	}
-
 	public void addListener(RecorderListener listener) {
 		listeners << listener
-	}
-
-	@Ensures({ result != null })
-	public List<BasicBlockIdent> basicBlocksRemaining(String className) {
-		return probesRemaining[className].clone();
 	}
 }
