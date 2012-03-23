@@ -33,6 +33,10 @@ class RecordManager {
 						writer.write(classRecord.toString() + "\n");
 				}
 			}
+			
+			if(classes.size() == 0) {
+				LoggerFactory.getLogger(this.class).warn("No classes were instrumented. Were packages specified correctly?")
+			}
 		}
 	}
 
