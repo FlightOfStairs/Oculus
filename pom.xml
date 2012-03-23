@@ -75,6 +75,9 @@
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 					<archive>
+						<manifest>
+							<mainClass>agent.DummyMain</mainClass>
+						</manifest>
 						<manifestEntries>
 							<Premain-Class>agent.Agent</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>

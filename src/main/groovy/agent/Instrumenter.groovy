@@ -67,8 +67,6 @@ public class Instrumenter {
 			methodGen.getInstructionList().setPositions();
 			methodGen.setMaxStack();
 			methodGen.setMaxLocals();
-			
-			methodGen.
 		}
 
 		return classGen.getJavaClass().getBytes()
