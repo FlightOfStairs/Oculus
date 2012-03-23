@@ -1,0 +1,12 @@
+Oculus is a lightweight tool to identify unused, or partially unused, lines in a JVM-hosted application.
+
+ * Downlod Latest Version : https://github.com/downloads/FlightOfStairs/Oculus/oculus.jar
+ * User Guide https://github.com/FlightOfStairs/Oculus/wiki/User%20Guide
+ * Technical Guide https://github.com/FlightOfStairs/Oculus/wiki/Technical%20Guide
+
+Oculus is available under GPLv3.
+
+## Usage Syntax
+
+`java -javaagent:oculus.jar=packages,to.be,traced ...`
+
